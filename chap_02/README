@@ -1,0 +1,17 @@
+Chapter 2 folder contains the following c programs:
+
+example1.cpp: First example in Chapter 2 using random points to generate
+the Sierpinski gasket. Equivalent to gasket.c from 5E.
+
+example2.cpp: Recursive generation of the Sierpinski gasket with triangles. Equivalent to gasket2.c in 5E.
+
+example3.cpp: Three dimensional Sierpinski gasket generated with rando points.
+
+example4.cpp: Three dimensional gasket using recursive subdivision with tetrahedra. Equivalent to tetra.c in 5E.
+
+example4b.cpp: Same as chap02_6E_example4.c but with colors determined in vertex shader based on position.
+
+example5.cpp: Marching squares program. Equivalent to contour.c in 5E.
+
+
+
