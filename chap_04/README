@@ -1,0 +1,9 @@
+This folder contains the C++ examples for Chapter 4
+
+example1.cpp: Orthogonal viewing of cube using lookat function to position viewer. At point is always at the origin (the center of the cube). Eye position and ortho parameters can be changed via the keyboard. Modelview and projection matrices are sent to vertex shader.
+
+example2.cpp: similar to example 1 using the frustum function to get a perspective view.
+
+example3.cpp: similar to example 2 using perspective function
+
+

@@ -3,14 +3,14 @@ LDLIBS = -lglut -lGLEW -lGL -lGLU
 CXXINCS = -I../../include
 
 INIT_SHADER = ../../common/InitShader.cpp
-EXAMPLELIST = example1 example2 example3 example4 example4b example5
+EXAMPLELIST = example1 example2 example3
 
 .PHONY: clean
 
 all: $(EXAMPLELIST)
 
 $(EXAMPLELIST):
-	g++ -g -O2 $(CXXINCS) $(INIT_SHADER) $@.cpp  $(LDLIBS) -o $@
+	g++ -g -O2 $(CXXINCS) $(INIT_SHADER) $@.cpp $(LDLIBS) -o $@
 
 clean:
 	rm $(EXAMPLELIST)
