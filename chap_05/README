@@ -1,0 +1,11 @@
+Examples from Chapter 5.
+
+example1.cpp: generates wire frame approximation to a sphere by recursive subdivision of a tetrahedron
+
+example2.cpp: rotating cube with diffuse, specular and ambient lighting. Vertex shades computed in application
+
+example3.cpp: rotating cube with lighting calculations done in vertex shader
+
+example6.cpp: shading of sphere model using true normals at vertices
+
+
