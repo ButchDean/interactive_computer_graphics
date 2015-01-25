@@ -9,7 +9,7 @@
 
 #include <cstdio>
 using namespace std;
-#include <vec.h>
+#include "vec.h"
 
 namespace Angel {
 

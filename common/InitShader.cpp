@@ -1,5 +1,5 @@
 
-#include "Angel.h"
+#include "../include/Angel.h"
 
 namespace Angel {
 
