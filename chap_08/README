@@ -1,0 +1,9 @@
+Examples from Chapter 8.
+
+example1.cpp: robot model with three parts: base, lower arm, upper arm
+
+example2.cpp: interactive figure model using stack implementation with stack.h
+
+example3.cpp: interactive figure model using recursive tree structure
+
+
