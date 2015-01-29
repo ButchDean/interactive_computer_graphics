@@ -1,0 +1,11 @@
+chap10_6E_example1.c:  Utah teapot by recursive subdivison of pataches. Need to replace drawing
+of quads with drawing of pairs of triangles
+
+chap10_6E_example2.c: draws a cubic Bezier curve by evaluating polynomial
+
+chap10_6E_example3.c: same as chap10_6E_example2.c but also draws control points
+
+chap10_6E_example4.c: test of point cloud rendering of sampled sphere
+
+
+
