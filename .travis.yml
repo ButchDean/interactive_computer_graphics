@@ -1,0 +1,22 @@
+language: cpp
+
+compiler: gcc
+
+addons:
+    apt:
+        packages:
+            - build-essential
+            - libglm-dev
+            - libglew-dev
+            - freeglut3-dev
+
+script:
+    - cd chap_02/LINUX_VERSIONS && make && cd ../../
+    - cd chap_03/LINUX_VERSIONS && make && cd ../../
+    - cd chap_04/LINUX_VERSIONS && make && cd ../../
+    - cd chap_05/LINUX_VERSIONS && make && cd ../../
+    - cd chap_07/LINUX_VERSIONS && make && cd ../../
+    - cd chap_08/LINUX_VERSIONS && make && cd ../../
+    - cd chap_09/LINUX_VERSIONS && make && cd ../../
+    - cd chap_10/LINUX_VERSIONS && make && cd ../../
+    - cd APPENDIX_A_EXAMPLES/LINUX_VERSIONS && make

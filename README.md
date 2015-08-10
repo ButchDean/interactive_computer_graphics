@@ -1,5 +1,7 @@
 # Interactive Computer Graphics
-## by Edward Angel 
+## by Edward Angel
+
+[![Build Status](https://travis-ci.org/ButchDean/interactive_computer_graphics.svg?branch=master)](https://travis-ci.org/ButchDean/interactive_computer_graphics)
 
 Ported to Linux (Ubuntu) by me. Any problems feel free to fork, fix then issue a pull request.
 
