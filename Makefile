@@ -7,4 +7,6 @@ all: $(CHAPTERDIRS)
 $(CHAPTERDIRS):
 	$(MAKE) -C $@/LINUX_VERSIONS
 
-.PHONY: $(CHAPTERDIRS)
+.PHONY: $(CHAPTERDIRS) cleanall
+
+cleanall:
