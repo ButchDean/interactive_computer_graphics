@@ -1,4 +1,4 @@
-#include "Angel.h"
+#include <Angel.h>
 
 #define N 36
 
@@ -201,7 +201,7 @@ main(int argc, char **argv)
 
     glutCreateWindow("colorcube");
 
-	glewExperimental = GL_TRUE;
+
     glewInit();
 
     program  = InitShader("vshader72.glsl", "fshader72.glsl");

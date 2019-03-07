@@ -1,7 +1,7 @@
 	/* sets up flat mesh */
 /* sets up elapsed time parameter for use by shaders */
 
-#include "Angel.h"
+#include <Angel.h>
 
 #define N 256
 
@@ -214,7 +214,6 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard);
     glutIdleFunc(idle);
 
-	glewExperimental = GL_TRUE;
 	glewInit();
 
     program = InitShader("vshader73.glsl", "fshader73.glsl");
