@@ -92,7 +92,6 @@ main( int argc, char **argv )
 
     glutCreateWindow( "Sierpinski Gasket" );
 
-	glewExperimental = GL_TRUE; 
     glewInit();
 
     init();
