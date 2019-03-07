@@ -179,7 +179,6 @@ int main(int argc, char** argv)
     glutIdleFunc(spinCube);
     glutKeyboardFunc(mykey);
 
-	glewExperimental = GL_TRUE;
 	glewInit();
     init();
 

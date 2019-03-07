@@ -36,9 +36,7 @@ point4 at = vec4(0.0, 0.0, 0.0, 1.0);
 point4 eye = vec4(0.0, 0.0, 2.0, 1.0);
 vec4 up = vec4(0.0, 1.0, 0.0, 0.0);
 
-GLfloat  g_left = -2.0, g_right = 2.0;
-GLfloat  g_bottom = -2.0, g_top = 2.0;
-GLfloat  g_near = -4.0, g_far = 4.0;
+GLfloat left= -2.0, right=2.0, top=2.0, bottom= -2.0, near= -4.0, far=4.0;
 
 mat4 model_view;
 mat4 projection;
@@ -142,7 +140,7 @@ void display()
      eye[1] = radius*sin(theta)*sin(phi);
      eye[2] = radius*cos(theta);
      model_view =  LookAt(eye, at, up);
-     projection = Ortho(g_left, g_right, g_bottom, g_top, g_near, g_far);
+     projection = Ortho(left, right, bottom, top, near, far);
      glUniformMatrix4fv(matrix_loc, 1, GL_TRUE, model_view);
      glUniformMatrix4fv(projection_loc, 1, GL_TRUE, projection);
      for(int i = 0; i<M; i+=3) glDrawArrays(GL_LINE_LOOP, i, 3); 
@@ -155,12 +153,12 @@ void mykey(unsigned char key, int mousex, int mousey)
 {
    float dr = 3.14159/180.0*5.0;
    if(key=='q'||key=='Q') exit(0);
-   if(key == 'x') {g_left *= 1.1; g_right *= 1.1; }
-   if(key == 'X') {g_left *= 0.9; g_right *= 0.9; }
-   if(key == 'y') {g_bottom *= 1.1; g_top *= 1.1; }
-   if(key == 'Y') {g_bottom *= 0.9; g_top *= 0.9; }
-   if(key == 'z') {g_near  *= 1.1; g_far *= 1.1;}
-   if(key == 'Z') {g_near *= 0.9; g_far *= 0.9;}
+   if(key == 'x') {left *= 1.1; right *= 1.1; }
+   if(key == 'X') {left *= 0.9; right *= 0.9; }
+   if(key == 'y') {bottom *= 1.1; top *= 1.1; }
+   if(key == 'Y') {bottom *= 0.9; top *= 0.9; }
+   if(key == 'z') {near  *= 1.1; far *= 1.1;}
+   if(key == 'Z') {near *= 0.9; far *= 0.9;}
    if(key == 'r') radius *= 2.0;
    if(key == 'R') radius *= 0.5;
    if(key == 'o') theta += dr;
@@ -187,7 +185,6 @@ int main(int argc, char** argv)
 	glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow("Color Cube");
 
-	glewExperimental = GL_TRUE;
 	glewInit();
     init();
 

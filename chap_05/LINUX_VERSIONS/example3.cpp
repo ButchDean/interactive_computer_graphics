@@ -238,7 +238,6 @@ main( int argc, char **argv )
     glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "Color Cube" );
 
-	glewExperimental = GL_TRUE;
     glewInit();
 
     init();
