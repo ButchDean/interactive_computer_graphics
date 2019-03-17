@@ -51,9 +51,9 @@ GLuint  model_view;  // model-view matrix uniform shader variable location
 
 // Projection transformation parameters
 
-GLfloat  left = -1.0, right = 1.0;
-GLfloat  bottom = -1.0, top = 1.0;
-GLfloat  zNear = 0.5, zFar = 3.0;
+GLfloat  g_left = -1.0, g_right = 1.0;
+GLfloat  g_bottom = -1.0, g_top = 1.0;
+GLfloat  g_zNear = 0.5, g_zFar = 3.0;
 
 GLuint  projection; // projection matrix uniform shader variable location
 
@@ -121,16 +121,16 @@ init()
     glVertexAttribPointer( vPosition, 4, GL_FLOAT, GL_FALSE, 0,
 			   BUFFER_OFFSET(0) );
 
-    GLuint vColor = glGetAttribLocation( program, "vColor" ); 
+    GLuint vColor = glGetAttribLocation( program, "vColor" );
     glEnableVertexAttribArray( vColor );
     glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0,
 			   BUFFER_OFFSET(sizeof(points)) );
 
     model_view = glGetUniformLocation( program, "model_view" );
     projection = glGetUniformLocation( program, "projection" );
-    
+
     glEnable( GL_DEPTH_TEST );
-    glClearColor( 1.0, 1.0, 1.0, 1.0 ); 
+    glClearColor( 1.0, 1.0, 1.0, 1.0 );
 }
 
 //----------------------------------------------------------------------------
@@ -150,7 +150,7 @@ display( void )
     mat4  mv = LookAt( eye, at, up );
     glUniformMatrix4fv( model_view, 1, GL_TRUE, mv );
 
-    mat4  p = Ortho( left, right, bottom, top, zNear, zFar );
+    mat4  p = Ortho( g_left, g_right, g_bottom, g_top, g_zNear, g_zFar );
     glUniformMatrix4fv( projection, 1, GL_TRUE, p );
 
     glDrawArrays( GL_TRIANGLES, 0, NumVertices );
@@ -169,12 +169,12 @@ keyboard( unsigned char key, int x, int y )
 	    exit( EXIT_SUCCESS );
 	    break;
 
-	case 'x': left *= 1.1; right *= 1.1; break;
-	case 'X': left *= 0.9; right *= 0.9; break;
-	case 'y': bottom *= 1.1; top *= 1.1; break;
-	case 'Y': bottom *= 0.9; top *= 0.9; break;
-	case 'z': zNear  *= 1.1; zFar *= 1.1; break;
-	case 'Z': zNear *= 0.9; zFar *= 0.9; break;
+	case 'x': g_left *= 1.1; g_right *= 1.1; break;
+	case 'X': g_left *= 0.9; g_right *= 0.9; break;
+	case 'y': g_bottom *= 1.1; g_top *= 1.1; break;
+	case 'Y': g_bottom *= 0.9; g_top *= 0.9; break;
+	case 'z': g_zNear  *= 1.1; g_zFar *= 1.1; break;
+	case 'Z': g_zNear *= 0.9; g_zFar *= 0.9; break;
 	case 'r': radius *= 2.0; break;
 	case 'R': radius *= 0.5; break;
 	case 'o': theta += dr; break;
@@ -183,12 +183,12 @@ keyboard( unsigned char key, int x, int y )
 	case 'P': phi -= dr; break;
 
 	case ' ':  // reset values to their defaults
-	    left = -1.0;
-	    right = 1.0;
-	    bottom = -1.0;
-	    top = 1.0;
-	    zNear = 0.5;
-	    zFar = 3.0;
+	    g_left = -1.0;
+	    g_right = 1.0;
+	    g_bottom = -1.0;
+	    g_top = 1.0;
+	    g_zNear = 0.5;
+	    g_zFar = 3.0;
 
 	    radius = 1.0;
 	    theta  = 0.0;

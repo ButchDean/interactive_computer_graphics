@@ -3,7 +3,7 @@
 // shades computed at vertices in application
 
 
-#include "Angel.h"
+#include <Angel.h>
 
 const int NumVertices = 36; //(6 faces)(2 triangles/face)(3 vertices/triangle)
 

@@ -5,7 +5,7 @@
 //   those colors across the triangles.
 //
 
-#include "Angel.h"
+#include <Angel.h>
 
 typedef Angel::vec4  color4;
 typedef Angel::vec4  point4;
@@ -121,16 +121,16 @@ init()
     glVertexAttribPointer( vPosition, 4, GL_FLOAT, GL_FALSE, 0,
 			   BUFFER_OFFSET(0) );
 
-    GLuint vColor = glGetAttribLocation( program, "vColor" ); 
+    GLuint vColor = glGetAttribLocation( program, "vColor" );
     glEnableVertexAttribArray( vColor );
     glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0,
 			   BUFFER_OFFSET(sizeof(points)) );
 
     model_view = glGetUniformLocation( program, "model_view" );
     projection = glGetUniformLocation( program, "projection" );
-    
+
     glEnable( GL_DEPTH_TEST );
-    glClearColor( 1.0, 1.0, 1.0, 1.0 ); 
+    glClearColor( 1.0, 1.0, 1.0, 1.0 );
 }
 
 //----------------------------------------------------------------------------
