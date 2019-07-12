@@ -10,7 +10,7 @@
 #include <iostream>
 #endif 
 
-#include "Angel.h"
+#include <Angel.h>
 
 typedef Angel::vec4 point4;
 typedef Angel::vec4 color4;
@@ -42,7 +42,7 @@ float height = HEIGHT;          /* size of window in complex plane */
 float width = WIDTH;
 float cx = CENTERX;             /* center of window in complex plane */
 float cy = CENTERY;
-int g_max = MAX_ITER;             /* number of interations per point */
+int max = MAX_ITER;             /* number of interations per point */
 
 int n = N;
 int m = M;
@@ -76,7 +76,7 @@ init( void )
 	    Complex p( x, y );
 
 	    float  v;
-            for ( int k = 0; k < g_max; k++ ) {
+            for ( int k = 0; k < max; k++ ) {
 		// compute c = c^2 + p
 		c *= c;
 		c += p;
@@ -199,7 +199,6 @@ main( int argc, char *argv[] )
     glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "mandlebrot" );
 
-	glewExperimental = GL_TRUE;
     glewInit();
 
     init();

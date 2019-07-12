@@ -9,7 +9,7 @@
 #define TRUE 1
 #define FALSE 0
 
-#include "Angel.h"
+#include <Angel.h>
 
 typedef vec4  point4;
 typedef vec4  color4;
@@ -325,8 +325,6 @@ int main(int argc, char** argv)
     glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow("particle system");
     glutDisplayFunc(myDisplay);
-    
-	glewExperimental = GL_TRUE;    
     glewInit();
     program = InitShader("vshader91.glsl", "fshader91.glsl");
     myinit ();

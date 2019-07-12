@@ -6,7 +6,7 @@
 #define INITIAL_SPEED 1.0
 #define NUM_COLORS 8
 
-#include "Angel.h"
+#include <Angel.h>
 
 typedef Angel::vec4 point4;
 typedef Angel::vec4 color4;
@@ -34,9 +34,6 @@ color4 vertex_colors[8] = {
     color4( 1.0, 1.0, 1.0, 1.0 )        // white
 };
 
-color4 colors[8] = {point4(0.0,0.0,0.0, 1.0),point4(1.0,0.0,0.0, 1.0),
-   point4(1.0,1.0,0.0, 1.0), point4(0.0,1.0,0.0, 1.0), point4(0.0,0.0,1.0, 1.0),
-   point4(1.0,0.0,1.0, 1.0), point4(0.0,1.0,1.0, 1.0), point4(1.0,1.0,1.0, 1.0)};
 
 point4 points[MAX_NUM_PARTICLES + 24];
 color4 point_colors[MAX_NUM_PARTICLES + 24];
@@ -66,9 +63,9 @@ int last_time;
 int num_particles = INITIAL_NUM_PARTICLES;
 float point_size = INITIAL_POINT_SIZE;
 float speed = INITIAL_SPEED;
-bool gravity = false;            /* gravity off */
-bool elastic = false;            /* restitution off */
-bool repulsion = false;          /* repulsion off */
+bool gravity = FALSE;            /* gravity off */
+bool elastic = FALSE;            /* restitution off */
+bool repulsion = FALSE;          /* repulsion off */
 float coef = 1.0;                 /* perfectly elastic collisions */
 float d2[MAX_NUM_PARTICLES][MAX_NUM_PARTICLES];   /* array for interparticle distances */
 
@@ -108,10 +105,10 @@ init( void )
     colorcube();
 
     /* set up particles with random locations and velocities */
-    for (int i = 0; i < num_particles; i++ ) {
+    for ( i = 0; i < num_particles; i++ ) {
         particles[i].mass = 1.0;
         particles[i].color = i % NUM_COLORS;
-        for (int j = 0; j < 3; j++ ) {
+        for ( j = 0; j < 3; j++ ) {
             particles[i].position[j] =
                 2.0 * ( ( float ) rand() / RAND_MAX ) - 1.0;
             particles[i].velocity[j] =
@@ -135,7 +132,7 @@ init( void )
     glBufferSubData( GL_ARRAY_BUFFER, sizeof(points), sizeof(colors), colors );
 
     // Load shaders and use the resulting shader program
-    GLuint program = InitShader( "vshader91.glsl", "fshader91.glsl" );
+    GLuint program = initShader( "vshader91.glsl", "fshader91.glsl" );
     glUseProgram( program );
 
     // set up vertex arrays
@@ -149,8 +146,8 @@ init( void )
     glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0,
 			   BUFFER_OFFSET(sizeof(points)) );
 
-    model_view_loc = glGetUniformLocation( program, "ModelView" );
-    projection_loc = glGetUniformLocation( program, "Projection" );
+    ModelView = glGetUniformLocation( program, "ModelView" );
+    Projection = glGetUniformLocation( program, "Projection" );
 
     glClearColor( 0.5, 0.5, 0.5, 1.0 );
     glPointSize( point_size );
@@ -297,7 +294,7 @@ display( void )
 {
     glClear( GL_COLOR_BUFFER_BIT );
 
-    for (int i = 0; i < num_particles; i++ ) {
+    for ( i = 0; i < num_particles; i++ ) {
         point_colors[i + 24] = colors[particles[i].color];
         // particles[i].position[3] = 1.0;
         points[i + 24] = particles[i].position;
@@ -307,7 +304,7 @@ display( void )
 	 glBufferSubData( GL_ARRAY_BUFFER, sizeof(points), sizeof(point_colors), point_colors );
 
     glDrawArrays( GL_POINTS, 24, num_particles );
-    for (int i = 0; i < 6; i++ )
+    for ( i = 0; i < 6; i++ )
         glDrawArrays( GL_LINE_LOOP, i * 4, 4 );
     glutSwapBuffers();
 }
@@ -323,11 +320,11 @@ reshape( int width, int height )
     point4 at = vec4( 0.0, 0.0, 0.0, 1.0 );
     vec4 up = vec4( 0.0, 1.0, 0.0, 1.0 );
 
-    projection = Ortho( -2.0, 2.0, -2.0, 2.0, -4.0, 4.0 );
-    model_view = LookAt( eye, at, up );
+    projection = ortho( -2.0, 2.0, -2.0, 2.0, -4.0, 4.0 );
+    model_view = lookat( eye, at, up );
 
-    glUniformMatrix4fv( model_view_loc, 1, GL_TRUE, model_view );
-    glUniformMatrix4fv( projection_loc, 1, GL_TRUE, projection );
+    glUniformMatrix4fv( ModelView, 1, GL_TRUE, model_view );
+    glUniformMatrix4fv( Projection, 1, GL_TRUE, projection );
 }
 
 //----------------------------------------------------------------------------
@@ -355,7 +352,6 @@ main( int argc, char **argv )
     glutAddMenuEntry( "quit", 10 );
     glutAttachMenu( GLUT_MIDDLE_BUTTON );
 
-	glewExperimental = GL_TRUE;
     glewInit();
 
     init();

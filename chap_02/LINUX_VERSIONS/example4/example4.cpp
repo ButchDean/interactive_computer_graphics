@@ -160,7 +160,6 @@ main( int argc, char **argv )
     glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "Simple GLSL example" );
 
-	glewExperimental = GL_TRUE; 
     glewInit();
 	
     init();
