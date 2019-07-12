@@ -1,6 +1,6 @@
 // Sphere approximation by recursive subdivision of a tetrahedron
 
-#include "Angel.h"
+#include <Angel.h>
 
 typedef Angel::vec4  color4;
 typedef Angel::vec4  point4;
@@ -36,9 +36,7 @@ point4 at = vec4(0.0, 0.0, 0.0, 1.0);
 point4 eye = vec4(0.0, 0.0, 2.0, 1.0);
 vec4 up = vec4(0.0, 1.0, 0.0, 0.0);
 
-GLfloat  g_left = -2.0, g_right = 2.0;
-GLfloat  g_bottom = -2.0, g_top = 2.0;
-GLfloat  g_near = -4.0, g_far = 4.0;
+GLfloat  g_left = -2.0, g_right = 2.0, g_bottom = -2.0, g_top = 2.0, g_near = -4.0, g_far = 4.0;
 
 mat4 model_view;
 mat4 projection;
@@ -187,7 +185,6 @@ int main(int argc, char** argv)
 	glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow("Color Cube");
 
-	glewExperimental = GL_TRUE;
 	glewInit();
     init();
 

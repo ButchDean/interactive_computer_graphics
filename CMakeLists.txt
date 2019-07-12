@@ -72,6 +72,8 @@ endif()
 if(BUILD_CHAP_10)
     add_subdirectory(chap_10/LINUX_VERSIONS/example1)
     add_subdirectory(chap_10/LINUX_VERSIONS/example2)
+    add_subdirectory(chap_10/LINUX_VERSIONS/example3)
+    add_subdirectory(chap_10/LINUX_VERSIONS/example4)
 endif()
 
 if(BUILD_APPEN_A)

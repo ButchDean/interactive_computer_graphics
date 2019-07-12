@@ -1,7 +1,7 @@
 // rotating cube with two texture objects
 // change textures with 1 and 2 keys
 
-#include "Angel.h"
+#include <Angel.h>
 
 const int  NumTriangles = 12; // (6 faces)(2 triangles/face)
 const int  NumVertices  = 3 * NumTriangles;
@@ -278,7 +278,6 @@ main( int argc, char **argv )
     glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "Color Cube" );
 
-	glewExperimental = GL_TRUE;
     glewInit();
 
     init();

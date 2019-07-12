@@ -1,6 +1,6 @@
 // fragment shading of sphere model
 
-#include "Angel.h"
+#include <Angel.h>
 
 const int NumTimesToSubdivide = 5;
 const int NumTriangles        = 4096;  // (4 faces)^(NumTimesToSubdivide + 1)
@@ -225,7 +225,6 @@ main( int argc, char **argv )
     glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "Sphere" );
 
-	glewExperimental = GL_TRUE;
     glewInit();
 
     init();

@@ -5,7 +5,7 @@
 //    variables.  Vertex positions and normals are sent after each
 //    rotation.
 
-#include "Angel.h"
+#include <Angel.h>
 
 typedef Angel::vec4  color4;
 typedef Angel::vec4  point4;
@@ -238,7 +238,6 @@ main( int argc, char **argv )
     glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "Color Cube" );
 
-	glewExperimental = GL_TRUE;
     glewInit();
 
     init();

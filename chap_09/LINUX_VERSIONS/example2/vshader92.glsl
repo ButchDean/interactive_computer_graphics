@@ -1,9 +1,6 @@
-
-#version 150
-
-in  vec4 vPosition;
-in  vec4 vTexCoord;
-out vec2 texCoord;
+attribute  vec4 vPosition;
+attribute  vec4 vTexCoord;
+varying vec2 texCoord;
 
 uniform mat4 Projection;
 

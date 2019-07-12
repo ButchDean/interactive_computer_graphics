@@ -3,13 +3,6 @@
 
 const int NumVertices = 500;
 
-void
-init()
-{
-    // Generate spline data
-    vec2  points[NumVertices];
-    
-    for ( int i = 0; i < NumVertices; ++i ) {
 	// Spline control points
 	const vec2 p[4] = {
 	    vec2( -1.00, -1.00 ),
@@ -18,6 +11,13 @@ init()
 	    vec2(  1.00, -1.00 )
 	};
 
+void
+init()
+{
+    // Generate spline data
+    vec2  points[NumVertices+4];
+    
+    for ( int i = 0; i < NumVertices; ++i ) {
 	const float d = 1.0 / ( NumVertices - 1.0 );
 
         float u = i * d;
@@ -25,10 +25,9 @@ init()
 	
 	points[i] =
 	    (u*u*u)*p[0] + 3*(u*u*v)*p[1] + 3*(u*v*v)*p[2] + (v*v*v)*p[3];
-//             points[i][j] =
-//                 p[0][j] * uu * uu * uu + 3.0 * p[1][j] * uu * uu * u +
-//                 3.0 * p[2][j] * uu * u * u + p[3][j] * u * u * u;
     }
+    
+    for(int i =0; i<4; i++) points[NumVertices+i] = p[i];
 
     // Create a vertex array object
     GLuint vao;
@@ -51,6 +50,8 @@ init()
     glVertexAttribPointer( vPosition, 2, GL_FLOAT, GL_FALSE, 0,
 			   BUFFER_OFFSET(0) );
 
+    glPointSize(5.0);
+
     glClearColor( 1.0, 1.0, 1.0, 1.0 );
 }
 
@@ -61,6 +62,7 @@ display( void )
 {
     glClear( GL_COLOR_BUFFER_BIT );
     glDrawArrays( GL_LINE_STRIP, 0, NumVertices );
+    glDrawArrays( GL_POINTS, NumVertices, 4 );
     glutSwapBuffers();
 }
 

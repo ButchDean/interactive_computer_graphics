@@ -7,8 +7,6 @@
 #ifndef __ANGEL_MAT_H__
 #define __ANGEL_MAT_H__
 
-#include <cstdio>
-using namespace std;
 #include "vec.h"
 
 namespace Angel {
@@ -766,8 +764,8 @@ inline
 mat4 LookAt( const vec4& eye, const vec4& at, const vec4& up )
 {
     vec4 n = normalize(eye - at);
-    vec4 u = normalize(cross(up,n));
-    vec4 v = normalize(cross(n,u));
+    vec4 u = vec4(normalize(cross(up,n)), 0.0);
+    vec4 v = vec4(normalize(cross(n,u)), 0.0);
     vec4 t = vec4(0.0, 0.0, 0.0, 1.0);
     mat4 c = mat4(u, v, n, t);
     return c * Translate( -eye );
@@ -782,15 +780,17 @@ mat3 Normal( const mat4& c)
 {
    mat3 d;
    GLfloat det;
-   det = c[0][0]*c[1][1]*c[2][2]+c[0][1]*c[1][2]*c[2][1]
-     -c[2][0]*c[1][1]*c[0][2]-c[1][0]*c[0][1]*c[2][2]-c[0][0]*c[1][2]*c[2][1];
+
+   det = c[0][0]*c[1][1]*c[2][2]+c[0][1]*c[1][2]*c[2][1]+c[0][2]*c[1][0]*c[2][1]
+        -c[2][0]*c[1][1]*c[0][2]-c[1][0]*c[0][1]*c[2][2]-c[0][0]*c[1][2]*c[2][1];
+
    d[0][0] = (c[1][1]*c[2][2]-c[1][2]*c[2][1])/det;
-   d[0][1] = -(c[0][1]*c[2][2]-c[0][2]*c[2][1])/det;
-   d[0][2] = (c[0][1]*c[2][0]-c[2][1]*c[2][2])/det;
+   d[0][1] = -(c[1][0]*c[2][2]-c[1][2]*c[2][0])/det;
+   d[0][2] =  (c[1][0]*c[2][1]-c[1][1]*c[2][0])/det;
    d[1][0] = -(c[0][1]*c[2][2]-c[0][2]*c[2][1])/det;
    d[1][1] = (c[0][0]*c[2][2]-c[0][2]*c[2][0])/det;
-   d[1][2] = -(c[0][0]*c[2][1]-c[2][0]*c[0][1])/det;
-   d[2][0] = (c[0][1]*c[1][2]-c[1][1]*c[0][2])/det;
+   d[1][2] = -(c[0][0]*c[2][1]-c[0][1]*c[2][0])/det;
+   d[2][0] =  (c[0][1]*c[1][2]-c[0][2]*c[1][1])/det;
    d[2][1] = -(c[0][0]*c[1][2]-c[0][2]*c[1][0])/det;
    d[2][2] = (c[0][0]*c[1][1]-c[1][0]*c[0][1])/det;
 

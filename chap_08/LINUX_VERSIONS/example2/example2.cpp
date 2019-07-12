@@ -1,5 +1,5 @@
 
-#include "Angel.h"
+#include <Angel.h>
 #include <assert.h>
 
 typedef Angel::vec4 point4;
@@ -500,7 +500,6 @@ main( int argc, char **argv )
     glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "robot" );
 
-	glewExperimental = GL_TRUE;
     glewInit();
 
     init();

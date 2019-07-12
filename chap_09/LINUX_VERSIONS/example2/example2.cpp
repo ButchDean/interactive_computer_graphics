@@ -42,7 +42,7 @@ float height = HEIGHT;          /* size of window in complex plane */
 float width = WIDTH;
 float cx = CENTERX;             /* center of window in complex plane */
 float cy = CENTERY;
-int g_max = MAX_ITER;             /* number of interations per point */
+int max = MAX_ITER;             /* number of interations per point */
 
 int n = N;
 int m = M;
@@ -76,7 +76,7 @@ init( void )
 	    Complex p( x, y );
 
 	    float  v;
-            for ( int k = 0; k < g_max; k++ ) {
+            for ( int k = 0; k < max; k++ ) {
 		// compute c = c^2 + p
 		c *= c;
 		c += p;
@@ -109,8 +109,8 @@ init( void )
 
     // Create a vertex array object
     GLuint vao;
-    glGenVertexArrays( 1, &vao );
-    glBindVertexArray( vao );
+    glGenVertexArraysAPPLE( 1, &vao );
+    glBindVertexArrayAPPLE( vao );
 
     // Create and initialize a buffer object
     GLuint buffer;
@@ -195,12 +195,7 @@ main( int argc, char *argv[] )
     glutInit( &argc, argv );
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB );
     glutInitWindowSize( N, M );
-    glutInitContextVersion( 3, 2 );
-    glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "mandlebrot" );
-
-	glewExperimental = GL_TRUE;
-    glewInit();
 
     init();
 

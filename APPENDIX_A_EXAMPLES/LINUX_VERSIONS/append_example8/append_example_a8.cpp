@@ -1,5 +1,4 @@
-// rotating cube with two texture objects
-// change textures with 1 and 2 keys
+// rotating cube with texture object
 
 #include "Angel.h"
 
@@ -141,11 +140,10 @@ init()
 
     glActiveTexture( GL_TEXTURE0 );
     glBindTexture( GL_TEXTURE_2D, textures[0] );
-
     // Create a vertex array object
     GLuint vao;
-    glGenVertexArrays( 1, &vao );
-    glBindVertexArray( vao );
+    glGenVertexArraysAPPLE( 1, &vao );
+    glBindVertexArrayAPPLE( vao );
 
     // Create and initialize a buffer object
     GLuint buffer;
@@ -254,13 +252,14 @@ keyboard( unsigned char key, int mousex, int mousey )
 	case 'q': case 'Q':
 	    exit( EXIT_SUCCESS );
 	    break;
-	case '1':
-	    glBindTexture( GL_TEXTURE_2D, textures[0] );
-	    break;
+        case '1':
+            glBindTexture( GL_TEXTURE_2D, textures[0] );
+            break;
 
-	case '2':
-	    glBindTexture( GL_TEXTURE_2D, textures[1] );
-	    break;
+        case '2':
+            glBindTexture( GL_TEXTURE_2D, textures[1] );
+            break;
+
     }
 
     glutPostRedisplay();
@@ -274,15 +273,9 @@ main( int argc, char **argv )
     glutInit( &argc, argv );
     glutInitDisplayMode( GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH );
     glutInitWindowSize( 512, 512 );
-    glutInitContextVersion( 3, 2 );
-    glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "Color Cube" );
 
-	glewExperimental = GL_TRUE;
-    glewInit();
-
     init();
-
     glutDisplayFunc( display );
     glutKeyboardFunc( keyboard );
     glutMouseFunc( mouse );

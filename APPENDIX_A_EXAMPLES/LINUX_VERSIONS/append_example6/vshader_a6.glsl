@@ -1,9 +1,6 @@
-#version 150 
-
-
-in  vec4 vPosition;
-in  vec3 vNormal;
-out vec4 color;
+attribute  vec4 vPosition;
+attribute  vec3 vNormal;
+varying vec4 color;
 
 uniform vec4 AmbientProduct, DiffuseProduct, SpecularProduct;
 uniform mat4 ModelView;

@@ -6,6 +6,8 @@ typedef Angel::vec4 point4;
 typedef Angel::vec4 color4;
 
 const int NumVertices = 36; //(6 faces)(2 triangles/face)(3 vertices/triangle)
+const int NumNodes = 10;
+const int NumAngles = 11;
 
 point4 points[NumVertices];
 color4 colors[NumVertices];
@@ -35,7 +37,7 @@ color4 vertex_colors[8] = {
 
 //----------------------------------------------------------------------------
 
-class MatrixStack {
+ class MatrixStack {
     int    _index;
     int    _size;
     mat4*  _matrices;
@@ -55,13 +57,16 @@ class MatrixStack {
     mat4& pop( void ) {
         assert( _index - 1 >= 0 );
         _index--;
-        return _matrices[_index];
+         return _matrices[_index];
     }
 };
 
-MatrixStack  mvstack;
+MatrixStack  mvstack; 
+
+
 mat4         model_view;
 GLuint       ModelView, Projection;
+
 
 //----------------------------------------------------------------------------
 
@@ -93,13 +98,12 @@ enum {
     LeftLowerLeg = 8,
     RightUpperLeg = 9,
     RightLowerLeg = 10,
-    NumNodes,
     Quit
 };
 
 // Joint angles with initial values
 GLfloat
-theta[NumNodes] = {
+theta[NumAngles] = {
     0.0,    // Torso
     0.0,    // Head1
     0.0,    // Head2
@@ -165,16 +169,18 @@ traverse( Node* node )
 {
     if ( node == NULL ) { return; }
 
-    mvstack.push( model_view );
+     mvstack.push( model_view );
 
     model_view *= node->transform;
     node->render();
 
-    if ( node->child ) { traverse( node->child ); }
+      traverse( node->child ); 
+    if ( node->child != NULL) { traverse( node->child ); }
 
     model_view = mvstack.pop();
 
-    if ( node->sibling ) { traverse( node->sibling ); }
+     traverse( node->sibling ); 
+    if ( node->sibling != NULL) { traverse( node->sibling ); }
 }
 
 //----------------------------------------------------------------------------
@@ -360,7 +366,7 @@ mouse( int button, int state, int x, int y )
         if ( theta[angle] < 0.0 ) { theta[angle] += 360.0; }
     }
 
-    mvstack.push( model_view );
+    //mvstack.push( model_view );
     
     switch( angle ) {
 	case Torso:
@@ -428,7 +434,7 @@ mouse( int button, int state, int x, int y )
 	    break;
     }
 
-    model_view = mvstack.pop();
+    // model_view = mvstack.pop();
     glutPostRedisplay();
 }
 
@@ -519,6 +525,7 @@ initNodes( void )
 
     m = Translate(0.0, UPPER_LEG_HEIGHT, 0.0) * RotateX(theta[RightLowerLeg]);
     nodes[RightLowerLeg] = Node( m, right_lower_leg, NULL, NULL );
+
 }
 
 //----------------------------------------------------------------------------
@@ -533,8 +540,8 @@ init( void )
     
     // Create a vertex array object
     GLuint vao;
-    glGenVertexArrays( 1, &vao );
-    glBindVertexArray( vao );
+    glGenVertexArraysAPPLE( 1, &vao );
+    glBindVertexArrayAPPLE( vao );
 
     // Create and initialize a buffer object
     GLuint buffer;
@@ -558,7 +565,7 @@ init( void )
     GLuint vColor = glGetAttribLocation( program, "vColor" );
     glEnableVertexAttribArray( vColor );
     glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0,
-			   BUFFER_OFFSET(points) );
+			   BUFFER_OFFSET(sizeof(points)) );
 
     ModelView = glGetUniformLocation( program, "ModelView" );
     Projection = glGetUniformLocation( program, "Projection" );
@@ -591,12 +598,7 @@ main( int argc, char **argv )
     glutInit( &argc, argv );
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
     glutInitWindowSize( 512, 512 );
-    glutInitContextVersion( 3, 2 );
-    glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "robot" );
-
-	glewExperimental = GL_TRUE;
-    glewInit();
 
     init();
 

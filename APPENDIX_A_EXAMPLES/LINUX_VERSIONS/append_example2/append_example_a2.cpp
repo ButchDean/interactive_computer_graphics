@@ -30,9 +30,10 @@ init( void )
     }
 
     // Create a vertex array object
-    GLuint vao;
-    glGenVertexArrays( 1, &vao );
-    glBindVertexArray( vao );
+    GLuint vao[1];
+    glGenVertexArraysAPPLE( 1, vao );
+    glBindVertexArrayAPPLE( vao[0] );
+    
 
     // Create and initialize a buffer object
     GLuint buffer;
@@ -84,16 +85,7 @@ main( int argc, char **argv )
     glutInitDisplayMode( GLUT_RGBA );
     glutInitWindowSize( 512, 512 );
 
-    // If you are using freeglut, the next two lines will check if 
-    // the code is truly 3.2. Otherwise, comment them out
-    
-    glutInitContextVersion( 3, 2 );
-    glutInitContextProfile( GLUT_CORE_PROFILE );
-
     glutCreateWindow( "Sierpinski Gasket" );
-    
-	glewExperimental = GL_TRUE;
-    glewInit();
 
     init();
 
