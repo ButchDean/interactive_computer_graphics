@@ -9,18 +9,17 @@ typedef GLfloat     point3[3];
 #include "vertices.h"
 #include "patches.h"
 
-
 const int NumTimesToSubdivide = 3;
 const int PatchesPerSubdivision = 4;
-const int NumQuadsPerPatch =
-    (int)pow( PatchesPerSubdivision, NumTimesToSubdivide );
-const int NumTriangles =
-    ( NumTeapotPatches * NumQuadsPerPatch * 2 /* triangles / quad */ );
-const int NumVertices =
-    ( NumTriangles * 3 /* vertices / triangle */ );
+const int NumQuadsPerPatch = 64;
+// const int NumQuadsPerPatch = (int) pow( PatchesPerSubdivision, NumTimesToSubdivide );
+const int NumTriangles = 32*64*2;
+// const int NumTriangles = ( NumTeapotPatches * NumQuadsPerPatch * 2 /* triangles / quad */ );
+const int NumVertices = 32*64*2*3;
+//     ( NumTriangles * 3 /* vertices / triangle */ );
 
 int     Index = 0;
-point4* points = (point4*)malloc(sizeof(point4) * NumVertices);
+point4  points[NumVertices];
 
 GLuint  Projection;
 
@@ -45,7 +44,7 @@ divide_curve( point4 c[4], point4 r[4], point4 l[4] )
     r[1] = ( mid + r[2] ) / 2;
 
     l[3] = r[0] = ( l[2] + r[1] ) / 2;
-
+    
     for ( int i = 0; i < 4; ++i ) {
 	l[i].w = 1.0;
 	r[i].w = 1.0;
@@ -77,7 +76,7 @@ transpose( point4 a[4][4] )
 	    point4 t = a[i][j];
 	    a[i][j] = a[j][i];
 	    a[j][i] = t;
-		}
+	}
     }
 }
 
@@ -135,14 +134,14 @@ init( void )
 
     // Create a vertex array object
     GLuint vao;
-    glGenVertexArrays( 1, &vao );
-    glBindVertexArray( vao );
+    glGenVertexArraysAPPLE( 1, &vao );
+    glBindVertexArrayAPPLE( vao );
 
     // Create and initialize a buffer object
     GLuint buffer;
     glGenBuffers( 1, &buffer );
     glBindBuffer( GL_ARRAY_BUFFER, buffer );
-    glBufferData( GL_ARRAY_BUFFER, sizeof(points) * NumVertices, points, GL_STATIC_DRAW );
+    glBufferData( GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW );
 
     // Load shaders and use the resulting shader program
     GLuint program = InitShader( "vshader101.glsl", "fshader101.glsl" );
@@ -217,12 +216,7 @@ main( int argc, char *argv[] )
     glutInit( &argc, argv );
     glutInitDisplayMode( GLUT_RGBA | GLUT_DOUBLE );
     glutInitWindowSize( 512, 512 );
-    glutInitContextVersion( 3, 2 );
-    glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "teapot" );
-
-	glewExperimental = GL_TRUE;
-    glewInit();
 
     init();
 
@@ -231,8 +225,5 @@ main( int argc, char *argv[] )
     glutKeyboardFunc( keyboard );
 
     glutMainLoop();
-
-    free(points);
-
     return 0;
 }
