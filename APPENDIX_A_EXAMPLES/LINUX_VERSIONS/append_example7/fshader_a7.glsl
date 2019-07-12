@@ -1,12 +1,7 @@
-#version 150 
-
-
 // per-fragment interpolated values from the vertex shader
-in  vec3 fN;
-in  vec3 fL;
-in  vec3 fE;
-
-out vec4 fColor;
+varying  vec3 fN;
+varying  vec3 fL;
+varying  vec3 fE;
 
 uniform vec4 AmbientProduct, DiffuseProduct, SpecularProduct;
 uniform mat4 ModelView;
@@ -35,7 +30,7 @@ void main()
 	specular = vec4(0.0, 0.0, 0.0, 1.0);
     }
 
-    fColor = ambient + diffuse + specular;
-    fColor.a = 1.0;
+    gl_FragColor = ambient + diffuse + specular;
+    gl_FragColor.a = 1.0;
 } 
 
