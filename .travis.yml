@@ -10,6 +10,7 @@ addons:
             - libglew-dev
             - freeglut3-dev
             - cmake
+            - g++-6
 
 script:
     - cmake .
