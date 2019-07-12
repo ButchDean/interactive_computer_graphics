@@ -5,8 +5,10 @@
 #define INITIAL_POINT_SIZE 5.0
 #define INITIAL_SPEED 1.0
 #define NUM_COLORS 8
+#define FALSE 0
+#define TRUE 1
 
-#include <Angel.h>
+#include "Angel.h"
 
 typedef Angel::vec4 point4;
 typedef Angel::vec4 color4;
@@ -42,6 +44,7 @@ GLuint program;
 mat4 model_view;
 mat4 projection;
 
+GLuint buffer;
 GLuint loc, loc2;
 GLint model_view_loc, projection_loc;
 
@@ -72,15 +75,15 @@ float d2[MAX_NUM_PARTICLES][MAX_NUM_PARTICLES];   /* array for interparticle dis
 
 //----------------------------------------------------------------------------
 
-int Index = 0;
+static int Index = 0;
 
 void
 quad( int a, int b, int c, int d )
 {
-    colors[Index] = point_colors[0]; points[Index] = vertices[a]; Index++;
-    colors[Index] = point_colors[0]; points[Index] = vertices[b]; Index++;
-    colors[Index] = point_colors[0]; points[Index] = vertices[c]; Index++;
-    colors[Index] = point_colors[0]; points[Index] = vertices[d]; Index++;
+    point_colors[Index] = vertex_colors[0]; points[Index] = vertices[a]; Index++;
+    point_colors[Index] = vertex_colors[0]; points[Index] = vertices[b]; Index++;
+    point_colors[Index] = vertex_colors[0]; points[Index] = vertices[c]; Index++;
+    point_colors[Index] = vertex_colors[0]; points[Index] = vertices[d]; Index++;
 }
 
 //----------------------------------------------------------------------------
@@ -105,10 +108,10 @@ init( void )
     colorcube();
 
     /* set up particles with random locations and velocities */
-    for ( i = 0; i < num_particles; i++ ) {
+    for ( int i = 0; i < num_particles; i++ ) {
         particles[i].mass = 1.0;
         particles[i].color = i % NUM_COLORS;
-        for ( j = 0; j < 3; j++ ) {
+        for ( int j = 0; j < 3; j++ ) {
             particles[i].position[j] =
                 2.0 * ( ( float ) rand() / RAND_MAX ) - 1.0;
             particles[i].velocity[j] =
@@ -119,20 +122,19 @@ init( void )
 
     // Create a vertex array object
     GLuint vao;
-    glGenVertexArrays( 1, &vao );
-    glBindVertexArray( vao );
+    glGenVertexArraysAPPLE( 1, &vao );
+    glBindVertexArrayAPPLE( vao );
 
     // Create and initialize a buffer object
-    GLuint buffer;
     glGenBuffers( 1, &buffer );
     glBindBuffer( GL_ARRAY_BUFFER, buffer );
-    glBufferData( GL_ARRAY_BUFFER, sizeof(points) + sizeof(colors),
+    glBufferData( GL_ARRAY_BUFFER, sizeof(points) + sizeof(point_colors),
 		  NULL, GL_STATIC_DRAW );
     glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(points), points );
-    glBufferSubData( GL_ARRAY_BUFFER, sizeof(points), sizeof(colors), colors );
+    glBufferSubData( GL_ARRAY_BUFFER, sizeof(points), sizeof(point_colors), point_colors );
 
     // Load shaders and use the resulting shader program
-    GLuint program = initShader( "vshader91.glsl", "fshader91.glsl" );
+    GLuint program = InitShader( "vshader91.glsl", "fshader91.glsl" );
     glUseProgram( program );
 
     // set up vertex arrays
@@ -146,8 +148,8 @@ init( void )
     glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0,
 			   BUFFER_OFFSET(sizeof(points)) );
 
-    ModelView = glGetUniformLocation( program, "ModelView" );
-    Projection = glGetUniformLocation( program, "Projection" );
+    model_view_loc = glGetUniformLocation( program, "ModelView" );
+    projection_loc = glGetUniformLocation( program, "Projection" );
 
     glClearColor( 0.5, 0.5, 0.5, 1.0 );
     glPointSize( point_size );
@@ -294,17 +296,16 @@ display( void )
 {
     glClear( GL_COLOR_BUFFER_BIT );
 
-    for ( i = 0; i < num_particles; i++ ) {
-        point_colors[i + 24] = colors[particles[i].color];
+    for ( int i = 0; i < num_particles; i++ ) {
+        point_colors[i + 24] = vertex_colors[particles[i].color];
         // particles[i].position[3] = 1.0;
         points[i + 24] = particles[i].position;
     }
 
-	 glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(points), points );
-	 glBufferSubData( GL_ARRAY_BUFFER, sizeof(points), sizeof(point_colors), point_colors );
-
+    glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(points), points );
+    glBufferSubData( GL_ARRAY_BUFFER, sizeof(points), sizeof(point_colors), point_colors );
     glDrawArrays( GL_POINTS, 24, num_particles );
-    for ( i = 0; i < 6; i++ )
+    for ( int i = 0; i < 6; i++ )
         glDrawArrays( GL_LINE_LOOP, i * 4, 4 );
     glutSwapBuffers();
 }
@@ -320,11 +321,11 @@ reshape( int width, int height )
     point4 at = vec4( 0.0, 0.0, 0.0, 1.0 );
     vec4 up = vec4( 0.0, 1.0, 0.0, 1.0 );
 
-    projection = ortho( -2.0, 2.0, -2.0, 2.0, -4.0, 4.0 );
-    model_view = lookat( eye, at, up );
+    mat4 projection = Ortho( -2.0, 2.0, -2.0, 2.0, -4.0, 4.0 );
+    mat4 model_view = LookAt( eye, at, up );
 
-    glUniformMatrix4fv( ModelView, 1, GL_TRUE, model_view );
-    glUniformMatrix4fv( Projection, 1, GL_TRUE, projection );
+    glUniformMatrix4fv( model_view_loc, 1, GL_TRUE, model_view );
+    glUniformMatrix4fv( projection_loc, 1, GL_TRUE, projection );
 }
 
 //----------------------------------------------------------------------------
@@ -335,8 +336,6 @@ main( int argc, char **argv )
     glutInit( &argc, argv );
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB );
     glutInitWindowSize( 512, 512 );
-    glutInitContextVersion( 3, 2 );
-    glutInitContextProfile( GLUT_CORE_PROFILE );
     glutCreateWindow( "particle system" );
 
     glutCreateMenu( menu );
@@ -351,8 +350,6 @@ main( int argc, char **argv )
     glutAddMenuEntry( "toggle repulsion", 9 );
     glutAddMenuEntry( "quit", 10 );
     glutAttachMenu( GLUT_MIDDLE_BUTTON );
-
-    glewInit();
 
     init();
 
