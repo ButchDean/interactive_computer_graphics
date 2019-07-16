@@ -47,7 +47,7 @@ class MatrixStack {
     ~MatrixStack()
 	{ delete[]_matrices; }
 
-    mat4& push( const mat4& m ) {
+    void push( const mat4& m ) {
         assert( _index + 1 < _size );
         _matrices[_index++] = m;
     }
