@@ -1,8 +1,6 @@
 # Interactive Computer Graphics
 ## by Edward Angel
 
-[![Build Status](https://travis-ci.org/ButchDean/interactive_computer_graphics.svg?branch=master)](https://travis-ci.org/ButchDean/interactive_computer_graphics)
-
 I have moved the build system from Make to CMake for various Linux distro compatibility, and have so far tested on Ubuntu and RedHat/CentOS.
 
 **Building the Project**
