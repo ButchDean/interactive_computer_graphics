@@ -44,7 +44,7 @@ The executables are grouped by chapter then example, so if you want chap04 examp
 build/chap_04/LINUX_VERSIONS/example1/
 ```
 
-where you will find the executable (along with the associated source and shader files):
+where you will find the executable:
 
 ```
 chap_04_ex1
@@ -53,3 +53,5 @@ chap_04_ex1
 Any problems feel free to fork, fix then issue a pull request.
 
 [Here is the link](http://www.cs.unm.edu/~angel/BOOK/INTERACTIVE_COMPUTER_GRAPHICS/SIXTH_EDITION/CODE/) to the Mac and Windows original versions on Edward Angel's site.
+
+Dean Butcher (2019)
