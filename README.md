@@ -7,10 +7,15 @@ I have moved the build system from Make to CMake for various Linux distro compat
 
 **Building the Project**
 
-To default build everything you can simply enter the command from project root directory:
+To default build it is advisable to create a build directory from project root directory and go into it:
 
 ```
-$ cmake . && make
+$ mkdir build && cd build
+```
+Then once you are in there, do:
+
+```
+$ cmake .. && make
 ```
 
 You also have a lot of control over what you want to build when. If you look at the CMakeLists.txt file in the project root you will see the following lines of code:
@@ -30,7 +35,7 @@ option(BUILD_APPEN_A "Build Appendix A subproject." ON)
 where you have the option to cherrypick which projects you would like built. Alternatively, you can do the same from the command line, for example to not build the first Chapter 02 subproject you can do:
 
 ```
-$ cmake -DBUILD_CHAP_02=OFF . && make
+$ cmake -DBUILD_CHAP_02=OFF .. && make
 ```
 
 **Where are the executables?**
@@ -38,7 +43,7 @@ $ cmake -DBUILD_CHAP_02=OFF . && make
 The executables are grouped by chapter then example, so if you want chap04 example1 you follow the path:
 
 ```
-chap_04/LINUX_VERSIONS/example1/
+build/chap_04/LINUX_VERSIONS/example1/
 ```
 
 where you will find the executable (along with the associated source and shader files):
