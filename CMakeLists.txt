@@ -2,6 +2,13 @@
 
 cmake_minimum_required(VERSION 2.8.0)
 
+option(USE_CLANG "Using Clang compiler" OFF)
+
+if(USE_CLANG)
+    set(CMAKE_C_COMPILER "clang")
+    set(CMAKE_CXX_COMPILER "clang++")
+endif()
+
 project(interactive_computer_graphics)
 
 option(BUILD_CHAP_02 "Build Chap 02 subproject." ON)
