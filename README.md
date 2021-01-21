@@ -15,7 +15,7 @@ Then once you are in there, do:
 ```
 $ cmake .. && make
 ```
-Note that you can speed up the build process if you are aware how many cores your CPU has and how many threads each of those cores can execute. For example, if I have a CPU with 4 cores (physical processing units) and each of those cores can run one thread each (4 x 1 = 4 logical processing units) I know that I can make build my code 4x faster by using the '-j' option like this (using the last command as an example: 
+Note that you can speed up the build process if you are aware how many cores your CPU has and how many threads each of those cores can execute. For example, if I have a CPU with 4 cores (physical processing units) and each of those cores can run one thread each (4 x 1 = 4 logical processing units) I know that I can build my code 4x faster by using the '-j' option like this (using the last command as an example): 
 
 ```
 $ cmake .. && make -j4
