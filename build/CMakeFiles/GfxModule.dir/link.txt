@@ -1,2 +1,0 @@
-/usr/bin/ar qc libGfxModule.a CMakeFiles/GfxModule.dir/common/InitShader.cc.o
-/usr/bin/ranlib libGfxModule.a

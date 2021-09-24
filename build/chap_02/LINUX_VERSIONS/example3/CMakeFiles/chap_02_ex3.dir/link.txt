@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/chap_02_ex3.dir/example3.cc.o -o chap_02_ex3  ../../../libGfxModule.a -lglut -lGLEW -lGL -lGLU 

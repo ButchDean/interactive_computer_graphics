@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/append_ex7.dir/append_example_a7.cc.o -o append_ex7  ../../../libGfxModule.a -lglut -lGLEW -lGL -lGLU 
