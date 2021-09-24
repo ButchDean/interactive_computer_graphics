@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/append_ex3.dir/append_example_a3.cc.o -o append_ex3  ../../../libGfxModule.a -lglut -lGLEW -lGL -lGLU 

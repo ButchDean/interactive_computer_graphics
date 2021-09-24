@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/append_ex10.dir/append_example_a10.cc.o -o append_ex10  ../../../libGfxModule.a -lglut -lGLEW -lGL -lGLU 

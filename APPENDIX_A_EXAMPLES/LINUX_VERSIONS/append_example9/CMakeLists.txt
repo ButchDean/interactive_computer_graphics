@@ -2,7 +2,7 @@
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-add_executable(append_ex9 append_example_a9.cpp)
+add_executable(append_ex9 append_example_a9.cc)
 
 target_link_libraries(append_ex9 GfxModule)
 

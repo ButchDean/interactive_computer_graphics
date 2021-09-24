@@ -3,7 +3,7 @@
 include_directories(${CMAKE_SOURCE_DIR}/include
 		    ${CMAKE_SOURCE_DIR}/include/data)
 
-add_executable(append_ex10 append_example_a10.cpp)
+add_executable(append_ex10 append_example_a10.cc)
 
 target_link_libraries(append_ex10 GfxModule)
 

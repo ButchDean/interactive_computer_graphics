@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/deanbutcher/Documents/interactive_computer_graphics/common/InitShader.cc
+../include/Angel.h
+/home/deanbutcher/Documents/interactive_computer_graphics/include/Angel.h
+
+/home/deanbutcher/Documents/interactive_computer_graphics/include/Angel.h
+cmath
+-
+iostream
+-
+OpenGL/OpenGL.h
+-
+GLUT/glut.h
+-
+GL/glew.h
+-
+GL/freeglut.h
+-
+GL/freeglut_ext.h
+-
+vec.h
+/home/deanbutcher/Documents/interactive_computer_graphics/include/vec.h
+mat.h
+/home/deanbutcher/Documents/interactive_computer_graphics/include/mat.h
+
+/home/deanbutcher/Documents/interactive_computer_graphics/include/mat.h
+vec.h
+/home/deanbutcher/Documents/interactive_computer_graphics/include/vec.h
+
+/home/deanbutcher/Documents/interactive_computer_graphics/include/vec.h
+Angel.h
+/home/deanbutcher/Documents/interactive_computer_graphics/include/Angel.h
+

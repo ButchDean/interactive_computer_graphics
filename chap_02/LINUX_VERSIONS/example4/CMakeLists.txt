@@ -2,7 +2,7 @@
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-add_executable(chap_02_ex4 example4.cpp)
+add_executable(chap_02_ex4 example4.cc)
 
 target_link_libraries(chap_02_ex4 GfxModule)
 

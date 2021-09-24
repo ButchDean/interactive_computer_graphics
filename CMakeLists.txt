@@ -22,7 +22,7 @@ option(BUILD_CHAP_10 "Build Chap 10 subproject." ON)
 option(BUILD_APPEN_A "Build Appendix A subproject." ON)
 
 ADD_LIBRARY(GfxModule
-    ${CMAKE_SOURCE_DIR}/common/InitShader.cpp
+    ${CMAKE_SOURCE_DIR}/common/InitShader.cc
 )
 
 target_link_libraries(GfxModule -lglut)
