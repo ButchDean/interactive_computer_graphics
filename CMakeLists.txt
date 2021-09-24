@@ -24,7 +24,7 @@ option(BUILD_CHAP_09 "Build Chap 09 subproject." ON)
 option(BUILD_CHAP_10 "Build Chap 10 subproject." ON)
 option(BUILD_APPEN_A "Build Appendix A subproject." ON)
 
-ADD_LIBRARY(GfxModule
+add_library(GfxModule
     ${CMAKE_SOURCE_DIR}/common/InitShader.cc
 )
 
