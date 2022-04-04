@@ -1,7 +1,7 @@
-# Interactive Computer Graphics
+# Interactive Computer Graphics (Linux Versions)
 ## by Edward Angel
 
-I have moved the build system from Make to CMake for various Linux distro compatibility, and have so far tested on Ubuntu/Pop_OS and RedHat/CentOS.
+The code in this repo is the Linux version of the code. I have moved the build system from Make to CMake for various Linux distro compatibility, and have so far tested on Ubuntu/Pop_OS and RedHat/CentOS.
 
 **Building the Project**
 
