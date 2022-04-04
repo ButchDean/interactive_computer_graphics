@@ -58,4 +58,4 @@ Any problems feel free to fork, fix then issue a pull request.
 
 [Here is the link](http://www.cs.unm.edu/~angel/BOOK/INTERACTIVE_COMPUTER_GRAPHICS/SIXTH_EDITION/CODE/) to the Mac and Windows original versions on Edward Angel's site.
 
-Dean Butcher (2019)
+Dean Butcher (2022)
