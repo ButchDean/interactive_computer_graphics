@@ -5,21 +5,13 @@ I have moved the build system from Make to CMake for various Linux distro compat
 
 **Building the Project**
 
-To default build it is advisable to create a build directory from project root directory and go into it:
+From the project root directory do:
 
 ```
-$ mkdir build && cd build
+$ cmake -S . -B build
+$ cmake --build build
 ```
-Then once you are in there, do:
 
-```
-$ cmake .. && make
-```
-for sequential builds. If you want to use all available cores to build the project faster, you can do:
-
-```
-$ cmake .. && make -j$(nproc)
-```
 You also have a lot of control over what you want to build when. If you look at the CMakeLists.txt file in the project root you will see the following lines of code:
 
 ```
@@ -34,11 +26,7 @@ option(BUILD_CHAP_10 "Build Chap 10 subproject." ON)
 option(BUILD_APPEN_A "Build Appendix A subproject." ON)
 ```
 
-where you have the option to cherrypick which projects you would like built. Alternatively, you can do the same from the command line, for example to not build the first Chapter 02 subproject you can do:
-
-```
-$ cmake -DBUILD_CHAP_02=OFF .. && make
-```
+where you have the option to cherrypick which projects you would like built. 
 
 **Where are the executables?**
 
