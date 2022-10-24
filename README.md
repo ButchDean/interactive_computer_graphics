@@ -9,7 +9,7 @@ From the project root directory do:
 
 ```
 $ cmake -S . -B build
-$ cmake --build build
+$ cmake --build build -j$(nproc)
 ```
 
 You also have a lot of control over what you want to build when. If you look at the CMakeLists.txt file in the project root you will see the following lines of code:
